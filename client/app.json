@@ -275,7 +275,7 @@
     "production": {
         "output": {
             "appCache": {
-                "enable": true,
+                "enable": false,
                 "path": "cache.appcache"
             }
         },
@@ -410,7 +410,7 @@
 
     "cache": {
         "enable": false,
-        "deltas": true
+        "deltas": false
     },
 
     /**

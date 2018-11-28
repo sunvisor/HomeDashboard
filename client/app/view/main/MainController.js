@@ -10,6 +10,12 @@ Ext.define('HomeDashboard.view.main.MainController', {
     init() {
         this.getViewModel().readWeather();
         this.getViewModel().readCalendar();
+
+        // 定期的にデータ読み込み
+        Ext.interval(() => {
+            this.getViewModel().readWeather();
+            this.getViewModel().readCalendar();
+        }, 30 * 60 * 1000);
     },
 
     WEEK_NAMES: '日月火水木金土',

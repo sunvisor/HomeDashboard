@@ -16,13 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CalendarController extends Controller
 {
-    const CALENDARS = [
-        'hisashi@sunvisor.net',
-        'kiyoho@sunvisor.net',
-        'kensuke@sunvisor.net',
-        'sunvisor.net_mong9e5bn6vgq1n30v2sa7m038@group.calendar.google.com',
-        'ja.japanese#holiday@group.v.calendar.google.com',
-    ];
+    const CONFIG_PATH = __DIR__ . '/../../secret/my_calendar.json';
 
     /**
      * @Route("/calendar", name="calendar")
@@ -34,7 +28,8 @@ class CalendarController extends Controller
         $s = $now->setTime(0, 0);
         $e = $s->addDay();
         $result = [];
-        foreach (self::CALENDARS as $key => $calendar) {
+        $calendars = $this->getCaledars();
+        foreach ($calendars as $key => $calendar) {
             $result = array_merge($result, $weather->getCalendar($calendar, $s, $e, $key));
         }
         usort($result, function ($a, $b) {
@@ -60,7 +55,8 @@ class CalendarController extends Controller
         $s = $now->setTime(0, 0);
         $e = $s->addDay();
         $result = [];
-        foreach (self::CALENDARS as $key => $calendar) {
+        $calendars = $this->getCaledars();
+        foreach ($calendars as $key => $calendar) {
             $result = array_merge($result, $weather->getCalendar($calendar, $s, $e, $key));
         }
         usort($result, function ($a, $b) {
@@ -71,5 +67,15 @@ class CalendarController extends Controller
 
         return $this->json($result);
 
+    }
+
+    /**
+     * @return false|mixed|string
+     */
+    protected function getCaledars()
+    {
+        $calendars = file_get_contents(self::CONFIG_PATH);
+        $calendars = json_decode($calendars, true);
+        return $calendars;
     }
 }

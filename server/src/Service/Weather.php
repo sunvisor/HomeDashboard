@@ -10,7 +10,6 @@ namespace App\Service;
 
 
 use Cake\Chronos\Chronos;
-use DateTimeImmutable;
 
 class Weather
 {

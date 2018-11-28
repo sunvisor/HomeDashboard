@@ -1,0 +1,85 @@
+.weather {
+  margin: 16px;
+  display: flex;
+
+  .today-info {
+    margin-right: 32px;
+    .month {
+      font-size: 20px;
+    }
+    div.day {
+      margin-top: 24px;
+    }
+    span.day {
+      font-size: 80px;
+    }
+    span.day-caption {
+      font-size: 20px;
+    }
+    .week {
+      margin-top: 4px;
+      font-size: 20px;
+      text-align: center;
+    }
+  }
+  .spacer {
+    flex: 1
+  }
+
+  .currently-weather {
+    display: flex;
+    margin-right: 32px;
+  }
+
+  .icon {
+    img {
+      width: 70px;
+    }
+  }
+
+  .currently-temperature {
+    margin-left: 16px;
+    margin-right: 16px;
+    .temperature {
+      margin-top: 24px;
+
+      .value {
+        font-size: 70px;
+      }
+      .unit {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .today-temperature {
+    display: flex;
+    .caption {
+      margin-right: 16px;
+    }
+    .data div {
+      text-align: right;
+      margin-right: 4px;
+    }
+  }
+}
+
+.hourly {
+  margin: 16px;
+  display: flex;
+
+  .hourly-item {
+    flex: 1;
+
+    div {
+      text-align: center;
+    }
+  }
+
+  .icon {
+    height: 36px;
+    img {
+      width: 32px;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.calendar {
+  .title {
+    margin-top: 16px;
+    margin-left: 16px;
+    font-size: 20px;
+  }
+  .calendar-item {
+    margin: 16px 16px 0 16px;
+    padding: 8px;
+  }
+  .type-0 {
+    color: white;
+    background-color: #0d47a1;
+    font-size: 24px;
+  }
+  .type-1 {
+    color: white;
+    background-color: #1b5e20;
+    font-size: 24px;
+  }
+  .type-2 {
+    color: white;
+    background-color: #ad1457;
+    font-size: 24px;
+  }
+  .type-3 {
+    background-color: #dce775;
+  }
+  .type-4 {
+    color: white;
+    background-color: red;
+  }
+}

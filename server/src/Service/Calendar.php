@@ -9,7 +9,9 @@
 namespace App\Service;
 
 
+use DateTimeImmutable;
 use Google_Client;
+use Google_Exception;
 use Google_Service_Calendar;
 
 class Calendar
@@ -21,12 +23,16 @@ class Calendar
      */
     private $client;
 
+    /**
+     * Calendar constructor.
+     * @throws Google_Exception
+     */
     public function __construct()
     {
         $this->client = $this->getClient();
     }
 
-    public function getCalendar($calendarId, \DateTimeImmutable $startDay, \DateTimeImmutable $endDay, $key)
+    public function getCalendar($calendarId, DateTimeImmutable $startDay, DateTimeImmutable $endDay, $key)
     {
         $calendar = new Google_Service_Calendar($this->client);
         $optParams = [
@@ -57,9 +63,9 @@ class Calendar
     /**
      * Returns an authorized API client.
      * @return Google_Client the authorized client object
-     * @throws \Google_Exception
+     * @throws Google_Exception
      */
-    private function getClient()
+    public function getClient()
     {
         $client = new Google_Client();
         $client->setApplicationName('my calendar');

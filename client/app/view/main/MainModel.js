@@ -12,6 +12,11 @@ Ext.define('HomeDashboard.view.main.MainModel', {
     CALENDAR_URI: '../calendar',
     //CALENDAR_URI: '../calendar/2018/11/29',
 
+    data: {
+        title: '今日の予定',
+        date: new Date()
+    },
+
     readWeather() {
         Ext.Ajax.request({
             url: this.WEATHER_URI
@@ -25,8 +30,11 @@ Ext.define('HomeDashboard.view.main.MainModel', {
     },
 
     readCalendar() {
+        const date = Ext.Date.format(this.get('date'), 'Y/m/d');
+        const url = `${this.CALENDAR_URI}/${date}`;
+
         Ext.Ajax.request({
-            url: this.CALENDAR_URI
+            url
         }).then(ret => {
             const view     = this.getView(),
                   today    = new Date(),

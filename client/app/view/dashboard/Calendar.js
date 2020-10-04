@@ -2,15 +2,16 @@
  * Created by sunvisor on 2018-11-26.
  */
 Ext.define('HomeDashboard.view.dashboard.Calendar', {
-    extend: 'Ext.Component',
+    extend: 'Ext.Panel',
 
     xtype: 'calendar',
 
+    bind: {
+        title: '{title}'
+    },
+
     tpl: [
         '<div class="calendar">',
-        '<div class="title">',
-        '今日の予定',
-        '</div>',
         '<tpl for=".">',
         '  <div class="calendar-item type-{calendarId}">',
         '  <tpl if="time">',

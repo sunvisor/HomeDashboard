@@ -9,12 +9,15 @@ Ext.define('HomeDashboard.view.main.Main', {
     xtype: 'app-main',
 
     requires: [
+        'Ext.layout.VBox',
         'HomeDashboard.view.dashboard.Calendar',
-        'HomeDashboard.view.dashboard.Weather'
+        'HomeDashboard.view.dashboard.Weather',
+        'HomeDashboard.view.main.MainController',
+        'HomeDashboard.view.main.MainModel'
     ],
 
     controller: 'main',
-    viewModel: 'main',
+    viewModel : 'main',
 
     defaults: {
         tab: {
@@ -23,8 +26,13 @@ Ext.define('HomeDashboard.view.main.Main', {
     },
 
     listeners: {
-        loadWeather: 'onLoadWeather',
+        loadWeather : 'onLoadWeather',
         loadCalendar: 'onLoadCalendar'
+    },
+
+    layout: {
+        type : 'vbox',
+        align: 'stretch'
     },
 
     items: [
@@ -32,7 +40,24 @@ Ext.define('HomeDashboard.view.main.Main', {
             xtype: 'weather',
         },
         {
-            xtype: 'calendar'
+            xtype    : 'calendar',
+            reference: 'calendar',
+            flex     : 1,
+
+            tools: [
+                {
+                    html   : '前日',
+                    handler: 'onPervDate'
+                },
+                {
+                    html   : '今日',
+                    handler: 'onToday'
+                },
+                {
+                    html   : '翌日',
+                    handler: 'onNextDate'
+                },
+            ]
         }
     ]
 

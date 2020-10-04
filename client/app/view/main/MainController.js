@@ -9,17 +9,26 @@ Ext.define('HomeDashboard.view.main.MainController', {
 
     init() {
         this.getViewModel().readWeather();
-        this.getViewModel().readCalendar();
+        this.loadCalendar();
 
         // 定期的にデータ読み込み
         Ext.interval(() => {
             this.getViewModel().readWeather();
-            this.getViewModel().readCalendar();
+            this.loadCalendar();
         }, 30 * 60 * 1000);
     },
 
     WEEK_NAMES: '日月火水木金土',
     WEEK_CLASS: ['sunday', '', '', '', '', '', 'saturday'],
+
+    loadCalendar() {
+        const comp = this.lookup('calendar');
+        comp.mask({
+            xtype: 'loadmask',
+            message: 'Loading...'
+        });
+        this.getViewModel().readCalendar();
+    },
 
     onLoadWeather: function (view, weather) {
         let hourly = [];
@@ -49,6 +58,32 @@ Ext.define('HomeDashboard.view.main.MainController', {
     },
 
     onLoadCalendar: function (view, calendar) {
-        view.down('calendar').setData(calendar);
-    }
+        const comp = this.lookup('calendar');
+        comp.unmask();
+        comp.setData(calendar);
+    },
+
+    onToday: function () {
+        const vm = this.getViewModel();
+
+        vm.set('date', new Date());
+        vm.set('title', '今日の予定')
+        this.loadCalendar();
+    },
+    onPervDate: function () {
+        this.selectDate(-1);
+    },
+    onNextDate: function () {
+        this.selectDate(1);
+    },
+
+    selectDate: function (interval) {
+        const vm = this.getViewModel(),
+              date = Ext.Date.add(vm.get('date'), Ext.Date.DAY, interval);
+
+        vm.set('date', date);
+        vm.set('title', Ext.Date.format(date, 'm/d') + 'の予定')
+        this.loadCalendar();
+    },
+
 });

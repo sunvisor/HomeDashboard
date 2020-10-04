@@ -37,14 +37,14 @@ Ext.define('HomeDashboard.view.main.MainModel', {
             url
         }).then(ret => {
             const view     = this.getView(),
-                  today    = new Date(),
+                  today    = this.get('date'),
                   calendar = Ext.decode(ret.responseText);
 
             let data = [];
             if (this.GOMI.indexOf(today.getDay()) !== -1) {
                 data.push({
                     summary: '燃えるゴミ',
-                    calendarId: 3
+                    calendarId: 4
                 })
             }
             for (let i = 0; i < calendar.length; i++) {

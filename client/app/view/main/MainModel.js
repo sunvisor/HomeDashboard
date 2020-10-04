@@ -54,9 +54,9 @@ Ext.define('HomeDashboard.view.main.MainModel', {
     getTime(calendar) {
         if (calendar.startDate) {
             switch (calendar.calendarId) {
-                case 3:
-                    return '資源ゴミ';
                 case 4:
+                    return '資源ゴミ';
+                case 5:
                     return '';
                 default:
                     return ''

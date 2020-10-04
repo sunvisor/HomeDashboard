@@ -31,6 +31,8 @@ git pull
 
 
 ```
-cd projects/HomeDashboard/client/build/production
+cd projects/HomeDashboard/client/
+sencha app build
+cd build/production
 rsync -av ./HomeDashboard/ www.sunvisor.net:/var/www/HomeDashboard/server/public/app/
 ```

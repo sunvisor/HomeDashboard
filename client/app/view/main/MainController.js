@@ -13,8 +13,15 @@ Ext.define('HomeDashboard.view.main.MainController', {
 
         // 定期的にデータ読み込み
         Ext.interval(() => {
+            const now = new Date(),
+                  hour = now.getHours();
+
             this.getViewModel().readWeather();
-            this.loadCalendar();
+            if (hour === 0) {
+                this.selectToday();
+            } else {
+                this.loadCalendar();
+            }
         }, 30 * 60 * 1000);
     },
 
@@ -64,11 +71,7 @@ Ext.define('HomeDashboard.view.main.MainController', {
     },
 
     onToday: function () {
-        const vm = this.getViewModel();
-
-        vm.set('date', new Date());
-        vm.set('title', '今日の予定')
-        this.loadCalendar();
+        this.selectToday();
     },
     onPervDate: function () {
         this.selectDate(-1);
@@ -77,7 +80,15 @@ Ext.define('HomeDashboard.view.main.MainController', {
         this.selectDate(1);
     },
 
-    selectDate: function (interval) {
+    selectToday() {
+        const vm = this.getViewModel();
+
+        vm.set('date', new Date());
+        vm.set('title', '今日の予定')
+        this.loadCalendar();
+    },
+
+    selectDate(interval) {
         const vm = this.getViewModel(),
               date = Ext.Date.add(vm.get('date'), Ext.Date.DAY, interval);
 

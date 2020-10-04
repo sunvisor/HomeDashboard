@@ -16,3 +16,21 @@
     - long: 経度
     
 
+## デプロイ
+
+サーバー側
+
+```
+ssh www.sunvisor.net
+sudo su -
+cd /var/www/Homedashboard
+git pull
+```
+
+クライアント側 (ローカルから転送)
+
+
+```
+cd projects/HomeDashboard/client/build/production
+rsync -av ./HomeDashboard/ www.sunvisor.net:/var/www/HomeDashboard/server/public/app/
+```

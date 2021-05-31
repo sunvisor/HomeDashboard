@@ -43,6 +43,7 @@ Ext.define('HomeDashboard.view.main.Main', {
             xtype    : 'calendar',
             reference: 'calendar',
             flex     : 1,
+            scrollable: true,
 
             tools: [
                 {
